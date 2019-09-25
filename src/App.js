@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {createContext, useState} from 'react';
 
 class Counter extends React.Component {
 	
@@ -17,9 +17,9 @@ class Counter extends React.Component {
         </div>
         )
     }
-  }
+}
   
-  class CounterFun extends React.Component {
+class CounterFun extends React.Component {
       constructor(props) {
         super(props);
       this.state = { counter: 0 };
@@ -35,9 +35,9 @@ class Counter extends React.Component {
         </div>
         )
     }
-  }
+}
   
-  const withCounter = Component => 
+const withCounter = Component => 
       class Abc extends React.Component {
         constructor(props) {
           super(props);
@@ -53,10 +53,10 @@ class Counter extends React.Component {
           </div>
             )
       }
-    }
+}
   
   
-  class CounterHOC extends React.Component {
+class CounterHOC extends React.Component {
       
     render() {
         console.log(CounterHOC.name + ' rendering');
@@ -64,10 +64,56 @@ class Counter extends React.Component {
           <div>CounterHO with Higher Order Component: {this.props.counter}</div>
       )
     }
-  }
+}
   
-  const WithCounterComponent = withCounter(CounterHOC);
-  
+const WithCounterComponent = withCounter(CounterHOC);
+
+// ==========================================================================================
+const context = createContext({});
+const { Provider, Consumer } = context;
+
+const CoreDb = (props) => {
+    const [type, setType] = useState('SOME_TYPE');
+
+    return (
+        <Provider
+            value={{
+                type, 
+                setType
+            }}
+        >
+            {props.children}
+        </Provider>
+    );
+}
+
+const CoreDbLayer = (props) => {
+
+    return (
+        <Consumer>
+            {(contextProps) => (
+                <div>
+                    CoreDbLayer: {contextProps.type}
+                </div>
+            )}
+        </Consumer>
+    );
+}
+
+const CoreDbControl = (props) => {
+
+    return (
+        <Consumer>
+            {(contextProps) => (
+                <div>
+                    <button onClick={() => {contextProps.setType(Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15))}}>
+                        Changed type
+                    </button>
+                </div>
+            )}
+        </Consumer>
+    );
+}
   
 class App extends React.Component {  
   
@@ -86,6 +132,11 @@ class App extends React.Component {
           
           <WithCounterComponent/>
           <hr/>
+
+          <CoreDb>
+              <CoreDbLayer />
+              <CoreDbControl />
+          </CoreDb>
         </div>
       )
     }
