@@ -1,4 +1,4 @@
-import React, {createContext, useState} from 'react';
+import React, {createContext, useState, useContext} from 'react';
 
 class Counter extends React.Component {
 	
@@ -114,6 +114,12 @@ const CoreDbLayer = (props) => {
     );
 }
 
+const CoreDbLayer2 = (props) => {
+    const testContext = useContext(TestContext.Consumer);
+    const typeContext = useContext(TypeContext);
+    return <div>testContext: {testContext.test}, type: {typeContext.type}</div>;
+}
+
 const CoreDbControl = (props) => {
 
     return (
@@ -150,6 +156,8 @@ class App extends React.Component {
           <CoreDb>
               <CoreDbLayer />
               <CoreDbControl />
+
+              <CoreDbLayer2 />
           </CoreDb>
         </div>
       )
