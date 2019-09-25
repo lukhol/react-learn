@@ -69,21 +69,27 @@ class CounterHOC extends React.Component {
 const WithCounterComponent = withCounter(CounterHOC);
 
 // ==========================================================================================
-const context = createContext({});
-const { Provider, Consumer } = context;
+const TypeContext = createContext({});
+const { Provider, Consumer } = TypeContext;
+
+const TestContext = createContext({});
 
 const CoreDb = (props) => {
     const [type, setType] = useState('SOME_TYPE');
 
     return (
-        <Provider
-            value={{
-                type, 
-                setType
-            }}
-        >
-            {props.children}
-        </Provider>
+        <TestContext.Provider value={{
+            test: 'test'
+        }}>
+            <Provider
+                value={{
+                    type, 
+                    setType
+                }}
+            >
+                {props.children}
+            </Provider>
+        </TestContext.Provider>
     );
 }
 
@@ -91,10 +97,18 @@ const CoreDbLayer = (props) => {
 
     return (
         <Consumer>
-            {(contextProps) => (
-                <div>
-                    CoreDbLayer: {contextProps.type}
-                </div>
+            {contextProps => (
+                <TestContext.Consumer>
+                    {context2Props => {
+                        console.log({contextProps, context2Props});
+                        
+                        return (
+                            <div>
+                                CoreDbLayer: {contextProps.type}, test: {context2Props.test}
+                            </div>
+                        )
+                    }}
+                </TestContext.Consumer>
             )}
         </Consumer>
     );
