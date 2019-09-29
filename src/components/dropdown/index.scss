@@ -1,0 +1,27 @@
+$bg-color: #fff;
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    position: absolute;
+    background-color: #fff;
+    color: black;
+    min-width: 10rem;
+    border: .5px solid #cecece;
+    border-radius: 4px;
+}
+
+.dropdown-menu ul {
+    list-style: none;
+}
+
+.dropdown-menu ul li {
+    padding: 8px 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: darken($bg-color, 5%);
+    }
+}
