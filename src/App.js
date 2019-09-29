@@ -9,6 +9,9 @@ import {
   TabHeader,
   TabHeaderItem
 } from "./components/tabs";
+import { Modal, ModalHeader, ModalBody, ModalFooter } from "./components/modal";
+
+const LOREM_IPSUM = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed mollis felis quis est commodo iaculis. Donec ut ullamcorper sem, ac rhoncus lacus. Mauris volutpat metus ut varius tempor. Praesent luctus nunc sit amet porttitor eleifend. Mauris ut aliquet massa, eget dignissim purus. Nullam non orci nulla. Nam egestas nulla a dolor euismod iaculis. Integer a leo vel purus porta auctor feugiat a dui. Quisque ut vehicula turpis. Ut volutpat suscipit lobortis. Sed laoreet ipsum nec dui lacinia accumsan. Aliquam tincidunt turpis nec libero laoreet elementum. Sed sodales arcu vel lacinia volutpat. Donec semper tincidunt bibendum. Aliquam justo lorem, tincidunt nec ante eget, facilisis ullamcorper arcu.';
 
 class Counter extends React.Component {
   constructor(props) {
@@ -23,7 +26,7 @@ class Counter extends React.Component {
       <div className="counter">
         {this.props.renderOrSomeAnotherName(this.state.counter)}
         <button
-          className="counter-increase"
+          className="counter-increase button"
           onClick={() => {
             this.setState({ counter: this.state.counter + 1 });
           }}
@@ -47,7 +50,10 @@ class CounterFun extends React.Component {
     return (
       <div>
         {this.props.children(counter)}
-        <button onClick={() => this.setState({ counter: counter + 1 })}>
+        <button 
+            className="button"
+            onClick={() => this.setState({ counter: counter + 1 })}
+        >
           Increment
         </button>
       </div>
@@ -67,6 +73,7 @@ const withCounter = Component =>
         <div>
           <Component counter={this.state.counter} />
           <button
+          className="button"
             onClick={() => this.setState({ counter: this.state.counter + 1 })}
           >
             Increment
@@ -78,7 +85,6 @@ const withCounter = Component =>
 
 class CounterHOC extends React.Component {
   render() {
-    console.log(CounterHOC.name + " rendering");
     return (
       <div>CounterHO with Higher Order Component: {this.props.counter}</div>
     );
@@ -120,8 +126,6 @@ const CoreDbLayer = props => {
       {contextProps => (
         <TestContext.Consumer>
           {context2Props => {
-            console.log({ contextProps, context2Props });
-
             return (
               <div>
                 CoreDbLayer: {contextProps.type}, test: {context2Props.test}
@@ -150,6 +154,7 @@ const CoreDbControl = props => {
       {contextProps => (
         <div>
           <button
+          className="button"
             onClick={() => {
               contextProps.setType(
                 Math.random()
@@ -178,10 +183,19 @@ const App = () => {
     });
   }, []);
 
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const toggle = () => {
+    setModalOpen(!isModalOpen);
+  };
+
+  const modalOpenClicked = () => {
+    setModalOpen(true);
+  };
+
   return (
     <div style={{ margin: "8px" }}>
-   
-   <TabPanel selectedTabId="1">
+      <TabPanel selectedTabId="1">
         <TabHeader>
           <TabHeaderItem tabId="1">Request</TabHeaderItem>
           <TabHeaderItem tabId="2">Compound components with tabs</TabHeaderItem>
@@ -203,9 +217,8 @@ const App = () => {
               <h3>Compound components with context 1</h3>
               <CoreDb>
                 <CoreDbLayer />
-                <CoreDbControl />
-
                 <CoreDbLayer2 />
+                <CoreDbControl />
               </CoreDb>
             </div>
           </TabBodyItem>
@@ -229,17 +242,30 @@ const App = () => {
             </div>
           </TabBodyItem>
           <TabBodyItem tabId="5">
-          <div className="row">
-        <h3>Counter with render props (children is a function)</h3>
-        <CounterFun>
-          {counter => (
-            <div>CounterFun with render props as a function: {counter}</div>
-          )}
-        </CounterFun>
-      </div>
+            <div className="row">
+              <h3>Counter with render props (children is a function)</h3>
+              <CounterFun>
+                {counter => (
+                  <div>
+                    CounterFun with render props as a function: {counter}
+                  </div>
+                )}
+              </CounterFun>
+            </div>
           </TabBodyItem>
         </TabBody>
       </TabPanel>
+
+      <button onClick={modalOpenClicked} className="button">Open modal</button>
+      <Modal open={isModalOpen} toggle={toggle}>
+        <ModalHeader close>This is header :)</ModalHeader>
+        <ModalBody>
+            {[1,2,3,4,5,6,7,8,9].map(i => LOREM_IPSUM)}
+        </ModalBody>
+        <ModalFooter>
+            Something in footer <button className="button">ELO</button>
+        </ModalFooter>
+      </Modal>
     </div>
   );
 };

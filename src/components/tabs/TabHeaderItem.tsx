@@ -15,7 +15,9 @@ const TabHeaderItem: React.FunctionComponent<TabHeaderItemProps> = (props) => {
             className={`tab-header-item ${activeClassName}`}
             onClick={() => { contextValue.setSelectedTab(props.tabId) }}
         >
-            {props.children}
+            <div>
+                {props.children}
+            </div>
         </div>
     )
 }

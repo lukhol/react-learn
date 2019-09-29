@@ -1,10 +1,9 @@
 $tab-indicator-color: gray;
 $tab-indicator-color-active: #108728cc;
 $tab-header-item-border-radius: 8px;
-$tab-header-item-indicator-height: 8px;
+$tab-header-item-indicator-height: 4px;
 
 .tab-header {
-    // padding-bottom: 16px;
     display: flex;
 }
 
@@ -13,7 +12,11 @@ $tab-header-item-indicator-height: 8px;
 }
 
 .tab-header-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     flex: 1;
+    text-align: center;
     position : relative;
     padding: $tab-header-item-indicator-height;
     padding-top: $tab-header-item-indicator-height*2;
