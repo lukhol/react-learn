@@ -1,0 +1,69 @@
+$tab-indicator-color: gray;
+$tab-indicator-color-active: #108728cc;
+$tab-header-item-border-radius: 8px;
+$tab-header-item-indicator-height: 8px;
+
+.test-component {
+    padding: 16px;
+}
+
+.tab-header {
+    margin-bottom: 16px;
+    display: flex;
+}
+
+.tab-panel {
+    padding: 16px;
+}
+
+.tab-header-item {
+    flex: 1;
+    position : relative;
+    padding: $tab-header-item-indicator-height;
+    padding-top: $tab-header-item-indicator-height*2;
+    padding-left: $tab-header-item-indicator-height*2;
+    border: 0px;
+    border-bottom: 1px solid gray;
+    border-top-left-radius: $tab-header-item-border-radius;
+    border-top-right-radius: $tab-header-item-border-radius;
+
+    &:before {
+        content: '';
+        width: 0%;
+        height: 0px;
+        opacity: 0;
+    }
+    
+    &.active {
+        border-bottom: 0px solid $tab-indicator-color;
+        border-top: 1px solid $tab-indicator-color;
+        border-left: 1px solid $tab-indicator-color;
+        border-right: 1px solid $tab-indicator-color;
+        font-weight: bold;
+    }
+
+    &.active:before {
+        content: '';
+        width: 100%;
+        height: $tab-header-item-indicator-height;
+        background-color: $tab-indicator-color-active;
+        position: absolute;
+        border-top: 1px solid $tab-indicator-color-active;
+        border-left: 1px solid $tab-indicator-color-active;
+        border-right: 1px solid $tab-indicator-color-active;
+        border-top-left-radius: $tab-header-item-border-radius;
+        border-top-right-radius: $tab-header-item-border-radius;
+        left: -1px;
+        top: -1px;
+        opacity: 1;
+        transition: background-color 0.3s ease-in, 
+                    width 0.3s ease-in, 
+                    opacity 0.3s ease-in,
+                    height 0.3s ease-in;
+    }
+
+    &:hover:not(.active) {
+        cursor: pointer;
+        background-color: #fcfcfc;
+    }
+}
