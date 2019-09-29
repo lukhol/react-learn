@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TabPanel, TabHeader, TabHeaderItem, TabBodyItem, TabBody } from './tabs';
+import { TabPanel, TabHeader, TabHeaderItem, TabBodyItem, TabBody } from './components/tabs';
 
 export default class TestTabs extends React.Component {
 

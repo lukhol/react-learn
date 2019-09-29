@@ -4,7 +4,7 @@ $tab-header-item-border-radius: 8px;
 $tab-header-item-indicator-height: 8px;
 
 .tab-header {
-    margin-bottom: 16px;
+    // padding-bottom: 16px;
     display: flex;
 }
 
@@ -62,4 +62,12 @@ $tab-header-item-indicator-height: 8px;
         cursor: pointer;
         background-color: #fcfcfc;
     }
+}
+
+.tab-body {
+    border-bottom: 1px solid gray;
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    padding: 16px;
+    margin: 0;
 }

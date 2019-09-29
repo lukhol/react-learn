@@ -4,7 +4,7 @@ import './index.scss';
 const TabBody = (props: any) => {
 
     return (
-        <div>{props.children}</div>
+        <div className="tab-body">{props.children}</div>
     )
 }
 

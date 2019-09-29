@@ -1,6 +1,14 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import axios from "axios";
-import TestTabs from "./components";
+import TestTabs from "./TestTabs";
+
+import {
+  TabPanel,
+  TabBody,
+  TabBodyItem,
+  TabHeader,
+  TabHeaderItem
+} from "./components/tabs";
 
 class Counter extends React.Component {
   constructor(props) {
@@ -172,20 +180,56 @@ const App = () => {
 
   return (
     <div style={{ margin: "8px" }}>
-      <div className="row">
-        <h3>Counter with render props</h3>
-        <Counter
-          renderOrSomeAnotherName={counter => (
-            <div>
-              Counter with render props as a prop:{" "}
-              <span className="render-props-counter">{counter}</span>
+   
+   <TabPanel selectedTabId="1">
+        <TabHeader>
+          <TabHeaderItem tabId="1">Request</TabHeaderItem>
+          <TabHeaderItem tabId="2">Compound components with tabs</TabHeaderItem>
+          <TabHeaderItem tabId="3">HOC</TabHeaderItem>
+          <TabHeaderItem tabId="4">Render prop (child)</TabHeaderItem>
+          <TabHeaderItem tabId="5">Render props (function)</TabHeaderItem>
+        </TabHeader>
+        <TabBody>
+          <TabBodyItem tabId="1">
+            <div className="row">
+              <h3>Request test</h3>
+              <div className="_result">
+                IS SUCCESS: {result != null ? result.toString() : null}
+              </div>
             </div>
-          )}
-        />
-      </div>
-      <hr />
+          </TabBodyItem>
+          <TabBodyItem tabId="2">
+            <div className="row">
+              <h3>Compound components with context 1</h3>
+              <CoreDb>
+                <CoreDbLayer />
+                <CoreDbControl />
 
-      <div className="row">
+                <CoreDbLayer2 />
+              </CoreDb>
+            </div>
+          </TabBodyItem>
+          <TabBodyItem tabId="3">
+            <div className="row">
+              <h3>Counter with HOC</h3>
+              <WithCounterComponent />
+            </div>
+          </TabBodyItem>
+          <TabBodyItem tabId="4">
+            <div className="row">
+              <h3>Counter with render props</h3>
+              <Counter
+                renderOrSomeAnotherName={counter => (
+                  <div>
+                    Counter with render props as a prop:{" "}
+                    <span className="render-props-counter">{counter}</span>
+                  </div>
+                )}
+              />
+            </div>
+          </TabBodyItem>
+          <TabBodyItem tabId="5">
+          <div className="row">
         <h3>Counter with render props (children is a function)</h3>
         <CounterFun>
           {counter => (
@@ -193,38 +237,9 @@ const App = () => {
           )}
         </CounterFun>
       </div>
-      <hr />
-
-      <div className="row">
-        <h3>Counter with HOC</h3>
-        <WithCounterComponent />
-      </div>
-      <hr />
-
-      <div className="row">
-        <h3>Compound components with context 1</h3>
-        <CoreDb>
-          <CoreDbLayer />
-          <CoreDbControl />
-
-          <CoreDbLayer2 />
-        </CoreDb>
-      </div>
-      <hr />
-
-      <div className="row">
-        <h3>Request test</h3>
-        <div className="_result">
-          IS SUCCESS: {result != null ? result.toString() : null}
-        </div>
-      </div>
-      <hr />
-
-      <div className="row">
-        <h3>Compound components with context 2 (TABS)</h3>
-        <TestTabs />
-      </div>
-      <hr />
+          </TabBodyItem>
+        </TabBody>
+      </TabPanel>
     </div>
   );
 };
