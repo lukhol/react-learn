@@ -182,8 +182,8 @@ const App = () => {
             </div>
           )}
         />
-        <hr />
       </div>
+      <hr />
 
       <div className="row">
         <h3>Counter with render props (children is a function)</h3>
@@ -192,14 +192,14 @@ const App = () => {
             <div>CounterFun with render props as a function: {counter}</div>
           )}
         </CounterFun>
-        <hr />
       </div>
+      <hr />
 
       <div className="row">
         <h3>Counter with HOC</h3>
         <WithCounterComponent />
-        <hr />
       </div>
+      <hr />
 
       <div className="row">
         <h3>Compound components with context 1</h3>
@@ -209,22 +209,22 @@ const App = () => {
 
           <CoreDbLayer2 />
         </CoreDb>
-        <hr />
       </div>
+      <hr />
 
       <div className="row">
         <h3>Request test</h3>
         <div className="_result">
           IS SUCCESS: {result != null ? result.toString() : null}
         </div>
-        <hr />
       </div>
+      <hr />
 
       <div className="row">
         <h3>Compound components with context 2 (TABS)</h3>
         <TestTabs />
-        <hr />
       </div>
+      <hr />
     </div>
   );
 };
