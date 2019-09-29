@@ -2,6 +2,7 @@ import * as React from 'react';
 
 export interface DropdownItemProps {
     onClick?: () => void;
+    separator?: boolean;
 }
 
 const DropdownItem: React.FunctionComponent<DropdownItemProps> = (props) => {

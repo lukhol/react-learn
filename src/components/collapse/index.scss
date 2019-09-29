@@ -1,0 +1,14 @@
+.collapse {
+
+    transition: max-height 0.7s ease;
+    overflow: hidden;
+    max-height: 0;
+
+    &.open {
+        max-height: 500px;
+    }
+
+    &.closed {
+        max-height: 0;
+    }
+}

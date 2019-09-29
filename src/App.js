@@ -24,6 +24,7 @@ import {
   DropdownMenu,
   DropdownToggle
 } from "./components/dropdown";
+import { Collapse } from './components/collapse';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "./components/modal";
 
 const LOREM_IPSUM =
@@ -45,6 +46,7 @@ const App = () => {
   };
 
   const [isDropdownOpen, setDopdrownOpen] = useState(false);
+  const [isCollapsed, setCollapsed] = useState(false);
 
   return (
     <div style={{ margin: "8px", maxWidth: "1200px", margin: "0 auto" }}>
@@ -139,11 +141,30 @@ const App = () => {
         <DropdownMenu>
           <DropdownItem>First</DropdownItem>
           <DropdownItem>Second</DropdownItem>
-          <DropdownItem>Third</DropdownItem>
+          <DropdownItem separator>Third</DropdownItem>
+          <DropdownItem>Fourth</DropdownItem>
+          <DropdownItem>Fifth</DropdownItem>
+          <DropdownItem>Sixth</DropdownItem>
         </DropdownMenu>
       </Dropdown>
 
       Content under dropdown
+
+      <br/> <hr/> <br/>
+
+      <button 
+        className="button"
+        onClick={() => setCollapsed(!isCollapsed)}
+      >
+        Collapse
+      </button>
+      <Collapse 
+        isOpen={isCollapsed}
+      >
+        <div style={{maxWidth: "600px"}}>
+          {[1, 2,].map(i => LOREM_IPSUM)}
+        </div>
+      </Collapse>
     </div>
   );
 };
