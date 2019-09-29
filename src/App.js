@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import axios from 'axios';
-import TestComponents from './components';
+import axios from "axios";
+import TestTabs from "./components";
 
 class Counter extends React.Component {
   constructor(props) {
@@ -162,51 +162,71 @@ const CoreDbControl = props => {
 };
 
 const App = () => {
-    const [result, setResult] = useState(null);
+  const [result, setResult] = useState(null);
 
-    useEffect(() => {
-        axios.get('http://www.mocky.io/v2/5d8f7cd03200005d00adec78')
-            .then(res => {
-                console.log({res});
-                setResult(res.data.success);
-            });
-    }, [])
+  useEffect(() => {
+    axios.get("http://www.mocky.io/v2/5d8f7cd03200005d00adec78").then(res => {
+      setResult(res.data.success);
+    });
+  }, []);
 
-    return (
-      <div>
+  return (
+    <div style={{ margin: "8px" }}>
+      <div className="row">
+        <h3>Counter with render props</h3>
         <Counter
           renderOrSomeAnotherName={counter => (
-            <div>Counter with render props as a prop: <span className="render-props-counter">{counter}</span></div>
+            <div>
+              Counter with render props as a prop:{" "}
+              <span className="render-props-counter">{counter}</span>
+            </div>
           )}
         />
         <hr />
+      </div>
 
+      <div className="row">
+        <h3>Counter with render props (children is a function)</h3>
         <CounterFun>
           {counter => (
             <div>CounterFun with render props as a function: {counter}</div>
           )}
         </CounterFun>
         <hr />
+      </div>
 
+      <div className="row">
+        <h3>Counter with HOC</h3>
         <WithCounterComponent />
         <hr />
+      </div>
 
+      <div className="row">
+        <h3>Compound components with context 1</h3>
         <CoreDb>
           <CoreDbLayer />
           <CoreDbControl />
 
           <CoreDbLayer2 />
         </CoreDb>
-
-        <br/><br/><br/><br/><br/><br/>
-        <div className="_result">
-            IS SUCCESS: {result != null ? result.toString() : null}
-        </div>
-
-        <br/><br/>
-        <TestComponents />
+        <hr />
       </div>
-    );
-}
+
+      <div className="row">
+        <h3>Request test</h3>
+        <div className="_result">
+          IS SUCCESS: {result != null ? result.toString() : null}
+        </div>
+        <hr />
+      </div>
+
+      <div className="row">
+        <h3>Compound components with context 2 (TABS)</h3>
+        <TestTabs />
+        <hr />
+      </div>
+    </div>
+  );
+};
 
 export default App;
